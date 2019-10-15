@@ -7,8 +7,9 @@ module.exports = {
     sidebar: 'auto',
     nav: [
       { text: '首页', link: '/' },
-      { text: '容器化', link: '/cointainer' },
+      { text: '容器化', link: '/container' },
       { text: '前端技术', link: '/frontend' },
+      { text: '后端技术', link: '/backend' },
       { text: '作者简介', link: '/author' },
     ],
     
