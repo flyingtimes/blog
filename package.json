@@ -1,0 +1,30 @@
+{
+  "name": "tutorial_startup",
+  "version": "1.0.0",
+  "description": "a startup project for documentation",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flyingtimes/tutorial_startup.git"
+  },
+  "keywords": [
+    "vuepress",
+    "tutorial"
+  ],
+  "author": "5200374@qq.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flyingtimes/tutorial_startup/issues"
+  },
+  "homepage": "https://github.com/flyingtimes/tutorial_startup#readme",
+  "dependencies": {
+    "vuepress": "^1.2.0",
+    "vuepress-plugin-code-switcher": "^1.0.0"
+  }
+}
