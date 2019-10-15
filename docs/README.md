@@ -1,8 +1,8 @@
 ---
 home: true
-heroText: 关于XXX的入门教程
+heroText: clark的技术博客
 heroImage: /god.jpg
-tagline: XXX
+tagline: 技术 博客
 actionText: 快速上手 →
 actionLink: /tutorial
 features:
