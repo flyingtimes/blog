@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/tutorial_startup/',
+  base: '/blog/',
   title: 'XXX的教程',
   description: '一个基本的课程框架',
   plugins: [ 'code-switcher' ],
