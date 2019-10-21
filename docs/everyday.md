@@ -30,4 +30,21 @@ extend: '@vuepress/theme-default'
     ...
 }
 ```
-
+ok，现在可以开始尝试对default主题做一些修改了
+例如，要修改home页面hero图片为圆角，可以在docs/.vuepress/components/Home.vue中添加一行
+``` js (7)
+  .hero
+    img
+      max-width: 100%
+      max-height 280px
+      display block
+      margin 3rem auto 1.5rem
+      border-radius 50px
+    text-align center
+```
+要修改代码的底色，可以在 docs/.vuepress/styles/code.styl 中修改颜色
+``` js (3)
+div[class*="language-"]
+  position relative
+  background-color  #389d70
+```
