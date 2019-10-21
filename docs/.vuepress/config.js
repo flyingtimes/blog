@@ -1,4 +1,5 @@
 module.exports = {
+  extend: '@vuepress/theme-default',
   base: '/blog/',
   title: 'clark的技术博客',
   description: '记录日常点滴技术',
