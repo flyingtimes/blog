@@ -4,17 +4,12 @@ heroImage: /god.jpg
 home: true
 tagline: ' '
 features:
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: 基于Vuepress
-  details: 享受 Vuepress的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 快速部署
-  details: VuePress 为每个页面预渲染生成静态的 HTML，可以直接发布github。
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: 基于Vuepress
-  details: 享受 Vuepress的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 快速部署
-  details: VuePress 为每个页面预渲染生成静态的 HTML，可以直接发布github。
+- title: 丰富的无线网通信经验
+  details: 超过十年的无线网络优化经验，跨越2G、3G、4G、5G，见证通信发展史
+- title: 大数据处理及分析
+  details: 管理超过一百万设备的数据处理及分析项目，熟悉海量数据分析方法与架构，数据库维护与分析经验丰富
+- title: 自动化IT运维
+  details: 在大型国有企业推动自动化IT运维实践，对CI/CD，kubernetes容器化运维有丰富实践经验
+
 
 ---
