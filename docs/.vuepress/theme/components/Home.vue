@@ -77,7 +77,6 @@ export default {
   margin 0px auto
   display block
   .hero
-    
     img
       max-width: 100%
       max-height 280px
@@ -88,7 +87,7 @@ export default {
     h1
       font-size 3rem
     h1, .description, .action
-      margin 1.8rem auto
+      margin 1.5rem auto
     .description
       max-width 35rem
       font-size 1.6rem

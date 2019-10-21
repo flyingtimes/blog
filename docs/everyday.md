@@ -3,8 +3,8 @@
 
 *每天腾出一小时来，完善自己的技术栈*
 
-## 第一个小目标
-> 以vuepress为研究对象，学习如何做theme，从而了解vuejs
+## 先开一个坑，vuepress
+> 用vuepress搭一个github上的博客，同时作为样本深入学习下vue。
 
 ### 2019.10.20
 
@@ -48,3 +48,5 @@ div[class*="language-"]
   position relative
   background-color  #389d70
 ```
+### 2019.10.21
+昨天基本搞清楚如何做自定义theme了，下来研究一下，theme机制是如何发挥作用的。

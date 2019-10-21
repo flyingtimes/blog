@@ -1,10 +1,10 @@
 ---
 home: true
-heroText: clark的技术博客
-heroImage: /god.jpg
-tagline: 技术 博客
-actionText: 快速上手 →
-actionLink: /tutorial
+heroText: 细节才是真正的魔鬼
+heroImage: /typing.jpg
+tagline: 5G、IT和技术宅
+actionText: 宅男的稿纸 →
+actionLink: /everyday
 features:
 - title: 简洁至上
   details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
