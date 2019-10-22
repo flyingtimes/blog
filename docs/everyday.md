@@ -9,6 +9,11 @@
 > 用vuepress搭一个github上的博客，同时作为样本深入学习下vue。
 
 ### 2019.10.20
+> yarn global add vuepress # 全局安装vuepress
+
+> 从我的blog起步，可以git clone https://github.com/flyingtimes/blog
+
+> 然后 yarn install && vuepress dev docs 
 
 要学习如何做theme，首先可以**弹出**一份default的theme做参考，导出方法集成在vuepress-cli里面了
 ```
@@ -26,7 +31,7 @@ docs
         index.js
 ```
 
-声明我们要生成一个在default主题集成上扩展的自定义主题，在docs/.vuepress/config.js 中加入
+在docs/.vuepress/config.js中声明：我们要在default主题上扩展自定义主题
 ``` js {2}
 module.exports = {
 extend: '@vuepress/theme-default'
@@ -65,3 +70,22 @@ div[class*="language-"]
 
 [深入浅出 VuePress（四）：插件系统](https://www.jianshu.com/p/b8000f6b24da)
 
+### 2019.10.22
+在vuepress 中使用的markdown插件，是markdown-it,在vuepress文档中有介绍，可以做一些配置，markdown-it本身还可以做插件扩展。
+
+https://vuepress.vuejs.org/zh/guide/markdown.html#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE
+
+如果仅仅是要改变markdown的渲染效果，这个在vuepress的主题样式里面修改，位置在docs/.vuepress/theme/style/index.styl中
+``` js {5,6,10,11}
+h2
+  font-size 1.65rem
+  padding-bottom .3rem
+  border-bottom 1px solid $borderColor
+  // 改变## 的颜色
+  color #3eaf7c
+
+h3
+  font-size 1.35rem
+  // 为 ### 添加下划线效果 
+  text-decoration underline
+```
