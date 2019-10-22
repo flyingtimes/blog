@@ -1,8 +1,16 @@
 # 一些md的样例
 
-## test1
+### memarid
 
-### a1
+```mermaid
+graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[Car]
+```
+### 代码段示例
 
 <CodeSwitcher :languages="{js:'MAC',ts:'WINDOWS'}">
 <template v-slot:js>
