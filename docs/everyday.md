@@ -99,3 +99,60 @@ h3
   // 为 ### 添加下划线效果 
   text-decoration underline
 ```
+#### 添加一个列出所有文章的控件的方法
+首先修改Page.vue,在其中加入List控件的呈现功能
+``` js {5,13,16}
+<template>
+  <main class="page">
+    ...
+    <Content class="theme-default-content" />
+    <List v-if="$page.frontmatter.showList"/>
+    ...
+  </main>
+</template>
+
+<script>
+import PageEdit from '@theme/components/PageEdit.vue'
+import PageNav from '@theme/components/PageNav.vue'
+import List from '../components/List.vue'
+
+export default {
+  components: { PageEdit, PageNav,List },
+  props: ['sidebarItems']
+}
+</script>
+```
+然后增加一个List.vue控件
+```js
+<template>
+  <div>
+    <div class="article" v-for="page in files">
+      <a v-bind:href="page.path">{{page.title}}</a>
+      <div class="keywords">
+        <span class="keyword" v-for="key in page.frontmatter.keywords">{{key}}</span>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  computed: {
+    files() {
+      return this.$site.pages
+        .filter(p => { 
+          return (!p.frontmatter.home) && (!p.showList);
+        });
+    }
+  }
+}
+</script>
+<style scoped>
+  ...
+</style>
+```
+最后就可以增加md页面了
+```
+---
+showList: true
+---
+```
