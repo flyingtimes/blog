@@ -14,7 +14,7 @@ export default {
     files() {
       return this.$site.pages
         .filter(p => { 
-          return (!p.frontmatter.home) && (!p.showList);
+          return (!p.frontmatter.home) && (!p.frontmatter.showList);
         });
     }
   }
