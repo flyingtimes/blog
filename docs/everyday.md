@@ -81,6 +81,7 @@ div[class*="language-"]
 [深入浅出 VuePress（四）：插件系统](https://www.jianshu.com/p/b8000f6b24da)
 
 ### 2019.10.22
+#### 改变markdown-it现实的效果
 在vuepress 中使用的markdown插件，是markdown-it,在vuepress文档中有介绍，可以做一些配置，markdown-it本身还可以做插件扩展。
 
 https://vuepress.vuejs.org/zh/guide/markdown.html#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE
@@ -99,6 +100,59 @@ h3
   // 为 ### 添加下划线效果 
   text-decoration underline
 ```
+#### 添加mermaid流程图组件
+在page.vue中引入
+```js {3,7,9}
+ <template> 
+  <main class="page">
+    <mermaid />
+    </main>
+</template>
+<script>
+import mermaid from '../components/mermaid.vue'
+export default {
+  components: { PageEdit, PageNav,List,mermaid },
+  ...
+}
+</script>
+```
+添加组件mermaid.vue
+```
+<template>
+</template>
+
+<style>
+div.language-mermaid {
+  background-color: inherit
+}
+</style>
+
+<script>
+export default {
+  beforeMount() {
+    import("mermaid/dist/mermaid").then(m => {
+      m.initialize({
+        startOnLoad: true
+      });
+      m.init('div.language-mermaid>pre>code');
+    });
+  }
+};
+</script>
+```
+这样你就可以在md中使用流程图了
+```
+```mermaid
+graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[Car]
+```
+具体使用方法在这里有说明
+https://github.com/knsv/mermaid
+
 #### 添加一个列出所有文章的控件的方法
 首先修改Page.vue,在其中加入List控件的呈现功能
 ``` js {5,13,16}
