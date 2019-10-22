@@ -1,8 +1,11 @@
 <template>
+  
+
   <main class="page">
     <slot name="top" />
-
     <Content class="theme-default-content" />
+    <List v-if="$page.frontmatter.showList"/>
+
     <PageEdit />
 
     <PageNav v-bind="{ sidebarItems }" />
@@ -14,9 +17,10 @@
 <script>
 import PageEdit from '@theme/components/PageEdit.vue'
 import PageNav from '@theme/components/PageNav.vue'
+import List from '../components/List.vue'
 
 export default {
-  components: { PageEdit, PageNav },
+  components: { PageEdit, PageNav,List },
   props: ['sidebarItems']
 }
 </script>

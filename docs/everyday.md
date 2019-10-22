@@ -1,3 +1,12 @@
+---
+keywords: 
+  - vuepress 
+  - theme 
+  - plugin 
+  - 安装
+
+---
+
 # 日课
 ![avatar](monk.jpg)
 

@@ -19,6 +19,7 @@ module.exports = {
       { text: '首页', link: '/' },
       { text: '日课', link: '/everyday' },
       { text: '百宝箱', link: '/toolbox' },
+      { text: '所有文章', link: '/listarticles' },
       { text: '作者简介', link: '/author' },
     ],
   }
