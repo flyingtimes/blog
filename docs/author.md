@@ -1,5 +1,6 @@
 ---
 heroText: clark
+title: 作者简介
 heroImage: /god.jpg
 home: true
 tagline: ' '

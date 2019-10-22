@@ -12,10 +12,9 @@
 export default {
   computed: {
     files() {
-        console.log(this.$site.pages)
       return this.$site.pages
         .filter(p => { 
-          return p.path.indexOf('/')>=0;
+          return (!p.frontmatter.home) && (!p.showList);
         });
     }
   }
@@ -23,20 +22,20 @@ export default {
 </script>
 <style scoped>
   .article {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-left: solid 5px #3eaf7c;
-    padding: 20px;
+    padding: 10px;
   }
   .keywords {
     margin-top: 10px;
   }
   .keyword {
     padding: 5px;
-    border-radius: 7px;
-    font-size: small;
+    border-radius: 5px;
+    font-size: medium;
     background: #3eaf7c;
     margin-right: 5px;
-    color: black;
+    color: white;
     font-weight: 500;
   }
 </style>

@@ -1,4 +1,5 @@
 ---
+title: 日课
 keywords: 
   - vuepress 
   - theme 
