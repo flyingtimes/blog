@@ -11,8 +11,9 @@ branches:
     - master
 
 install:
+  - npm install -g vuepress
   - npm install
-  - npm run build
-
+  - vuepress build docs
+  
 script:
   - ./travis_deploy.sh
