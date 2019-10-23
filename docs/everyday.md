@@ -210,7 +210,7 @@ export default {
 showList: true
 ---
 ```
-### 2019.10.22
+### 2019.10.23
 
 #### 为自己的blog添加基于travis的持续集成
 首先要在github上设置一个personal access token，为token取一个变量名，例如mytoken
