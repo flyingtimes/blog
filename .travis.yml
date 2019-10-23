@@ -11,8 +11,8 @@ branches:
     - master
 
 install:
-  - npm install -g vuepress
-  - npm install
+  - yarn global add vuepress
+  - yarn install
   - vuepress build docs
   
 script:
