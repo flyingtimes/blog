@@ -210,3 +210,38 @@ export default {
 showList: true
 ---
 ```
+#### 为自己的blog添加基于travis的持续集成
+首先要在github上设置一个personal access token，为token取一个变量名，例如mytoken
+https://github.com/settings/tokens
+
+然后添加一个部署文件 travis-deploy.sh
+```sh
+cd docs/.vuepress/dist
+git init
+git add -A
+git commit -m 'deploy'
+git push -f https://${mytoken}@github.com/flyingtimes/blog.git master:gh-pages
+```
+最后添加travis的配置文件
+```yaml
+language: node_js
+node_js:
+  - "8.15.1"
+
+cache:
+  directories:
+    - "node_modules"
+
+branches:
+  only:
+    - master
+
+install:
+  - npm install -g vuepress
+  - npm install
+  - vuepress build docs
+  
+script:
+  - bash ./travis_deploy.sh
+
+```
