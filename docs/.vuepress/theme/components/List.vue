@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="article" v-for="page in files">
-      <a v-bind:href="page.path">{{page.title}}</a>
+      <a v-bind:href="$withBase(page.path)">{{page.title}}</a>
       <div class="keywords">
         <span class="keyword" v-for="key in page.frontmatter.keywords">{{key}}</span>
       </div>
