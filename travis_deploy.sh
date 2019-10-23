@@ -1,4 +1,3 @@
-vuepress build docs
 cd docs/.vuepress/dist
 git init
 git add -A
