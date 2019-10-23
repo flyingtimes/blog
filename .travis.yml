@@ -16,4 +16,4 @@ install:
   - vuepress build docs
   
 script:
-  - ./travis_deploy.sh
+  - bash ./travis_deploy.sh
