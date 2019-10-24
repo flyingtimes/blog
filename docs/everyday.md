@@ -247,3 +247,75 @@ script:
   - bash ./travis_deploy.sh
 
 ```
+
+## ssh 访问内部网络
+### 2019.10.24
+#### 通过跳板机登陆内网
+```mermaid
+graph LR
+  A(台式机) -- "ssh(pemfile1,userB,portB)" -->B(跳板机) -- "ssh(pemfile2,userC,portC)" -->C(内网服务器)
+```
+
+```
+Host B
+   HostName     B's IP
+   Port         portB
+   User         userB
+   IdentityFile         ~/.ssh/pemfile1.pem
+Host C
+   HostName     C's IP
+   Port         portC
+   User         userC
+   IdentityFile         ~/.ssh/pemfile2.pem
+   ProxyCommand         ssh B nc %h %p
+```
+#### 跳板机不对外开放ssh，但有一个web端口开放
+
+```mermaid
+graph LR
+  A(台式机) -- "ssh(pemfile1,userB,portB,corkscrew_portBB)" -->B(跳板机,在corkscrew_portB上开启ssh代理) -- "ssh(pemfile2,userC,portC)" -->C(内网服务器)
+```
+使用corkscrew，可以在服务器上将web端口复用一个ssh代理，具体做法是在apache上添加配置文件/etc/httpd/conf.d/proxy.conf
+
+```xml
+<VirtualHost _default_:corkscrew_portBB>
+    ProxyRequests on
+    ProxyVia block
+    AllowCONNECT 22
+    <Proxy *>
+        # Deny all proxying by default ...
+        Require all granted
+    </Proxy>
+    <Proxy 127.0.0.1>
+        # Now allow proxying through localhost only
+        Require all granted
+    </Proxy>
+</VirtualHost>
+```
+这样一来，跳板机的corkscrew_portBB端口一方面可以提供http web 服务，另一方面通过这个端口将ssh代理到跳板机本地的22端口。
+在客户端上，可以brew install corkscrew下载客户端，并修改配置文件
+```
+Host B
+   HostName     127.0.0.1
+   Port         portB
+   User         userB
+   IdentityFile   ~/.ssh/pemfile1.pem
+   ProxyCommand   corkscrew B的外部ip corkscrew_portBB %h %p
+```
+#### 将内网服务器的一个app服务暴露到台式机上
+```sh
+# 第一组localhost:portDesktop 代表台式机上面暴露的端口
+# 第二组localhost:portC 代表远端服务器上面的一个app服务
+ssh -fNL localhost:portDesktop:localhost:portC serverC
+```
+现在，访问本机器localhost:portDesktop端口，就相当于访问serverC:portC
+
+#### 将内网服务器，暴露到公网
+```mermaid
+graph LR
+  A(内网服务器) -- "ssh(pemfile1,userB,portB)" -->B(公网服务器)
+```
+
+```sh
+ssh -fNR portB:localhost:portA userB@B 
+```
