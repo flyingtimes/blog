@@ -14,7 +14,7 @@ features:
 - title: 快速部署
   details: VuePress 为每个页面预渲染生成静态的 HTML，可以直接发布github。
 keywords:
-  - TypeScript    
+  - TypeScript
   - JavaScript
   - Tutorial
 ---
