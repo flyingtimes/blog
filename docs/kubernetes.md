@@ -23,7 +23,13 @@ service start haproxy
 ```
 sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" --upload-certs
 ```
-需要添加配置文件才能本地安装
+访问dashboard的方法
+首先获取token
 ```
-
+kubectl proxy
+kubectl -n kube-system describe $(kubectl -n kube-system get secret -n kube-system -o name | grep namespace) | grep token
+```
+访问网址
+```
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
