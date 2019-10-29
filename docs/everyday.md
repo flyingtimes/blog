@@ -322,4 +322,50 @@ graph LR
 ```sh
 ssh -fNR portB:localhost:portA userB@B 
 ```
+## 将vuejs前端项目变成跨平台手机端app
+### 2010.10.26
+一个普通的vuejs项目，一般是跑在浏览器上的。cordova可以通过打包技术，在app中预先开启一个浏览器，并自动打开vuejs编译好的h5。通过cordova-plugin，还可以调用手机的各类传感器、gps数据，从而实现用js模拟一个app应用。这种技术可以使一个前端vuejs开发人员，低成本的变成一个手机端开发人员。
 
+```mermaid
+graph LR
+  vuejs(前端应用) -- "vuejs编译" -->cordova的打包路径www下 -- cordova打包 --> 不同平台的项目代码
+```
+
+学习的话，可以先从这个项目开始
+https://github.com/flyingtimes/cordova-vue-startup.git
+
+#### 准备工作
+```
+# 安装cordova，vue工具
+npm install -g cordova
+npm install -g vue
+npm install -g vue-cli
+# 为cordova 添加不同平台的编译能力
+cordova platform add ios 
+cordova platform add android
+# 在本路径下创建一个完整的vue项目，myapp
+vue init webpack myapp
+cd myapp
+```
+在myapp目录下，要修改一下build这个动作的输出(config/index.js)，将输出发布到项目根目录的www路径下
+```js 
+build:{
+...
+index:  => '../../www/index.html'
+assetsRoot:  => '../../www'
+assetsPublicPath:  => ''
+}
+事实上，目录结构不一定按照本项目来，最主要的就是要将index、assetsRoot、PublicPath改到cordova的www目录下，便于打包。
+```
+#### 开发vuejs手机端应用
+现在你可以在myapp基础上，扩展你的应用内容
+#### 编译
+```
+cd myapp
+npm run build
+cd ../
+cordova build ios #或者
+cordova build android
+```
+#### 手机端编译
+如果是web或者android，只要android开发环境装好了，那就可以直接出来apk或者h5的内容了。但是如果是ios，还需要在xocde里面，打开编译好的路径，再用xcode编译一次。这样才能大功告成。
