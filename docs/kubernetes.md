@@ -1,14 +1,92 @@
 # kubernetes 高可用集群安装
 参考资料
 > https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-> https://github.com/kubernetes/kubeadm/issues/1315
+
+## Kubernetes核心组件组成
+
+* etcd保存了整个集群的状态
+* apiserver提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现等机制
+* controller manager负责维护集群的状态，比如故障检测、自动扩展、滚动更新
+* scheduler负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上
+* kubelet负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理
+* Container runtime负责镜像管理以及Pod和容器的真正运行（CRI）
+* kube-proxy负责为Service提供cluster内部的服务发现和负载均衡
+
+除了核心组件，还有一些推荐的Add-ons
+* kube-dns负责为整个集群提供DNS服务
+* Ingress Controller为服务提供外网入口
+* Heapster提供资源监控
+* Dashboard提供GUI
+* Federation提供跨可用区的集群
+* Fluentd-elasticsearch提供集群日志采集、存储与查询
 
 
-## 下载官方安装包
+## 在外网机器上的准备工作
+* 外网机器需要拉镜像，因此最好具备翻墙条件
+* 安装好docker
+* 安装 kubeadm
+
+先到这里确定当前最新的k8s版本
+https://github.com/kubernetes/kubernetes/releases
+我在此时看到的最新版本是v1.16.2
+KUBE_VERSION=v1.16.2
+
+### 准备离线镜像文件
+可以通过kubeadmin工具来获取离线镜像文件
+```sh
+# 下载三件套工具集
+wget https://dl.k8s.io/{KUBE_VERSION}/kubernetes-server-linux-amd64.tar.gz
+# 添加apt源
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+# 安装 docker，kubeadmin
+apt-get update
+apt-get install -y docker.io kubeadm
+# 获取相应版本的镜像信息
+kubeadm config images list --kubernetes-version={$KUBE_VERSION}
+# 用kubeadmin工具，生成拉去镜像的配置yml文件
+kubeadm config print init-defaults > kubeadm.yml
+# 拉取镜像
+kubeadm config images pull --config kubeadm.yml
+# 将镜像到处成一个压缩包
+docker save $(docker images | grep -v REPOSITORY | awk 'BEGIN{OFS=":";ORS=" "}{print $1,$2}') -o k8s{$KUBE_VERSION}.tar
 ```
-https://dl.k8s.io/v1.16.2/kubernetes-server-linux-amd64.tar.gz
+### 将生成的镜像倒入到内网
+在内外安装目标主机上
 ```
+docker load -i k8s{$KUBE_VERSION}.tar
+```
+## k8s集群的配置
+准备好三台centos操作系统的机器，例如app91，app92，app93
+机器需要做一些预先的配置
+```
+# 打开 ipvs
+modprobe -- ip_vs
+modprobe -- ip_vs_rr
+modprobe -- ip_vs_wrr
+modprobe -- ip_vs_sh
+modprobe -- nf_conntrack_ipv4
+# 添加k8s配置文件
+cat <<EOF >  /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
 
+sysctl -w net.ipv4.ip_forward=1
+systemctl stop firewalld && systemctl disable firewalld
+swapoff -a || true
+setenforce 0 || true
+
+
+# 调整 
+sudo cp ./kubernetes/server/bin/* /usr/bin/
+
+# Manual install kubelet
+
+```
 ## 配置 kubelet
 
 ```
@@ -176,4 +254,10 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 > kubectl apply -f csi-rbdplugin.yaml
 > kubectl apply -f csi-rbd-sc.yaml
 
-## test
+# tips 
+
+## chrome浏览器打开https://localhost:port 的时候，出现NET::ERR_CERT_INVALID错误
+* 在chrome中输入 chrome://flags/
+* 将 Allow invalid certificates for resources loaded from localhost 改为enable
+* 重新启动浏览器
+
