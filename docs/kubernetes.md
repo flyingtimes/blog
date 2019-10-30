@@ -1,3 +1,13 @@
+---
+title: K8S
+keywords: 
+  - kubernetes 
+  - 安装
+  - HA 
+  - 高可用
+  - 离线
+  - 教程
+---
 # kubernetes 高可用集群安装
 参考资料
 > https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
@@ -172,17 +182,53 @@ kubectl create -f recommended.yaml
 在相关镜像已经推送到镜像服务器的情况下，可以执行
 
 > kubectl apply -f csi-config-map.yaml
+
 > kubectl apply -f csi-rbd-secret.yaml
+
 > kubectl apply -f csi-provisioner-rbac.yaml
+
 > kubectl apply -f csi-nodeplugin-rbac.yaml
+
 > kubectl apply -f csi-rbdplugin-provisioner.yaml
+
 > kubectl apply -f csi-rbdplugin.yaml
+
 > kubectl apply -f csi-rbd-sc.yaml
+
+## master节点倒了如何重建
+我们模拟一个master节点倒了的情况，例如将master的docker关闭了，再重新开起来
+首先，整个集群的状态，要经过一段较长的时间（大概15分钟），才能完全将节点倒掉的情况确认；光看dashboard可能看到的是部分容器还在正常执行，实际已经倒了
+等从dashboard上看到准确的状态以后，这时候不能急着将节点加入回来。因为集群目前还是认为有1个节点只是down了，并没有将这个节点删除的，需要删除节点。
+```sh
+kubectl remove node app91
+```
+另外，虽然删除了k8s节点，但是etcd也有一个节点倒了，kubectl remove是不会管etcd的（各自可以独立部署的），因此需要手动将异常etcd节点删除。
+```sh
+# 登陆其中一个还活着的etcd容器
+kubectl exec -it etcd-app92 sh -n kube-system
+export ETCDCTL_API=3
+alias etcdctl='etcdctl --endpoints=https://192.169.5.181:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key'
+# 查看etcd节点状态
+etcdctl member list
+# 找出已经失效的etcd 删除
+etcdctl member remove xxxxx
+```
+将异常的k8s节点从集群中删除
+```
+kubectl remove node app91
+```
+然后再重新将节点加入回来就可以了
+```
+kubeadm join 192.169.5.180:19999 --token hm0ci6.u8q041ds6a2mktpm \
+    --discovery-token-ca-cert-hash sha256:109e5cea8a867b6b2ab24147ff1e76399976c127400c42e950ef47b3cfb74579 \
+    --control-plane
+```
 
 ## tips 
 
 ### dashboard访问时报证书错误
-打开https://localhost:port 的时候，出现NET::ERR_CERT_INVALID错误
+
+打开 https://127.0.0.1:8080 的时候，出现NET::ERR_CERT_INVALID错误
 * 在chrome中输入 chrome://flags/
 * 将 Allow invalid certificates for resources loaded from localhost 改为enable
 * 重新启动浏览器
