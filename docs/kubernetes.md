@@ -60,7 +60,7 @@ docker load -i k8s{$KUBE_VERSION}.tar
 ```
 ## k8s集群的配置
 准备好三台centos操作系统的机器，例如app91，app92，app93
-机器需要做一些预先的配置
+每一台机器都需要做一些预先的配置
 ```
 # 打开 ipvs
 modprobe -- ip_vs
@@ -79,19 +79,15 @@ sysctl -w net.ipv4.ip_forward=1
 systemctl stop firewalld && systemctl disable firewalld
 swapoff -a || true
 setenforce 0 || true
-
-
-# 解压缩tar文件，然后将二进制文件拷贝到目标路径
+```
+## 解压缩tar文件，然后将二进制文件拷贝到目标路径
 
 ```
 tar -xvzf kubernetes-server-linux-amd64.tar.gz
 sudo cp ./kubernetes/server/bin/* /usr/bin/
 ```
 
-# Manual install kubelet
-
-```
-## 配置 kubelet
+### 配置 kubelet
 
 ```
 curl -sSL "https://raw.githubusercontent.com/kubernetes/kubernetes/${RELEASE}/build/debs/kubelet.service" | sed "s:/usr/bin:/opt/bin:g" > /etc/systemd/system/kubelet.service
@@ -109,7 +105,7 @@ systemctl enable --now kubelet
 systemctl status kubelet
 ```
 
-## 启动K8S
+### 启动K8S
 假设192.169.5.180为master1的ip地址，kube api server 的端口为19999，那么 
  ```
  kubeadm init --pod-network-cidr=10.244.0.0/16  \
@@ -155,7 +151,7 @@ kubeadmin token create
 openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 # 然后用获取到的token和sha256，替换到join指令里面就行
 ```
-# 安装calico网络，以及dashboard
+### 安装calico网络，以及dashboard
 
 dashboard的安装在 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/ 有说明
 ```
@@ -169,7 +165,7 @@ curl https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/dep
 kubectl create -f calico.yaml
 kubectl create -f recommended.yaml
 ```
-## k8s安装ceph支持
+### k8s安装ceph支持
 
 参照 https://docs.ceph.com/docs/master/rbd/rbd-kubernetes/ 这里的说明按顺序执行yml文件
 
