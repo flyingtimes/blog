@@ -81,8 +81,12 @@ swapoff -a || true
 setenforce 0 || true
 
 
-# 调整 
+# 解压缩tar文件，然后将二进制文件拷贝到目标路径
+
+```
+tar -xvzf kubernetes-server-linux-amd64.tar.gz
 sudo cp ./kubernetes/server/bin/* /usr/bin/
+```
 
 # Manual install kubelet
 
@@ -94,120 +98,105 @@ curl -sSL "https://raw.githubusercontent.com/kubernetes/kubernetes/${RELEASE}/bu
 mkdir -p /etc/systemd/system/kubelet.service.d
 curl -sSL "https://raw.githubusercontent.com/kubernetes/kubernetes/${RELEASE}/build/debs/10-kubeadm.conf" | sed "s:/usr/bin:/opt/bin:g" > /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
 ```
-* 内网操作以下脚本
+对照上面在内网操作以下脚本
 
 ```
 sudo mkdir -p /etc/systemd/system/kubelet.service.d
 sudo cp kubelet.service /etc/systemd/system/
 sudo cp 10-kubeadm.conf /etc/systemd/system/kubelet.service.d/
 systemctl enable --now kubelet
-systemctl status kubelet
-```
 systemctl enable --now kubelet
 systemctl status kubelet
-
-
-## 离线镜像准备
->
-需要在外网机器操作
->
-
-```
-wget https://dl.k8s.io/v1.16.2/kubernetes-server-linux-amd64.tar.gz
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
-deb http://apt.kubernetes.io/ kubernetes-xenial main
-EOF
-apt-get update
-apt-get install -y docker.io kubelet kubeadm kubectl kubernetes-cni
-#
-kubeadm config images list --kubernetes-version=1.16.2
-k8s.gcr.io/kube-apiserver:v1.16.2
-k8s.gcr.io/kube-controller-manager:v1.16.2
-k8s.gcr.io/kube-scheduler:v1.16.2
-k8s.gcr.io/kube-proxy:v1.16.2
-k8s.gcr.io/pause:3.1
-k8s.gcr.io/etcd:3.3.15-0
-k8s.gcr.io/coredns:1.6.2
-#
-kubeadm config print init-defaults > kubeadm.yml
-#
-kubeadm config images pull --config kubeadm.yml
-#
-docker save $(docker images | grep -v REPOSITORY | awk 'BEGIN{OFS=":";ORS=" "}{print $1,$2}') -o k8s1.16.2.tar
-```
-
-## 导入镜像
-```
-docker load -i k8s1.16.2.tar
 ```
 
 ## 启动K8S
- 
+假设192.169.5.180为master1的ip地址，kube api server 的端口为19999，那么 
  ```
  kubeadm init --pod-network-cidr=10.244.0.0/16  \
  --control-plane-endpoint "192.169.5.180:19999" \
  --upload-certs --apiserver-advertise-address=0.0.0.0 \
  --kubernetes-version=v1.16.2
  ```
- 
+ 返回的信息很丰富，包含以下几个内容
+ 你需要把init产生的证书和配置信息，拷贝到你的当前用户下，否则日后kubeadm可能无法正常使用
+ ```
+ Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+ ```
+ 你可以增加一个master节点
  ```
  You can now join any number of the control-plane node running the following command on each as root:
 
-  kubeadm join 192.169.5.180:19999 --token 1tjcje.kmbzlkcm11t854m3 \
-    --discovery-token-ca-cert-hash sha256:455202365ffc59f46c7374694adf2477f0e67299f59a2b1c0ba7cf34e869daa5 \
-    --control-plane --certificate-key 13da448b92f7d55b5a7963094fe534c110ca93996800761aa04ba046fafbf1a9
+  kubeadm join 192.169.5.180:19999 --token hm0ci6.u8q041ds6a2mktpm \
+    --discovery-token-ca-cert-hash sha256:109e5cea8a867b6b2ab24147ff1e76399976c127400c42e950ef47b3cfb74579 \
+    --control-plane --certificate-key 690707d154c80ceed893c6bd8a11520a401fd43df606aeafc27fe64e99b3a67f
 
-Please note that the certificate-key gives access to cluster sensitive data, keep it secret!
-As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you can use
-"kubeadm init phase upload-certs --upload-certs" to reload certs afterward.
-
-Then you can join any number of worker nodes by running the following on each as root:
-
-kubeadm join 192.169.5.180:19999 --token 1tjcje.kmbzlkcm11t854m3 \
-    --discovery-token-ca-cert-hash sha256:455202365ffc59f46c7374694adf2477f0e67299f59a2b1c0ba7cf34e869daa5
+ ```
+ 还可以增加worker节点
+ ```
+ kubeadm join 192.169.5.180:19999 --token hm0ci6.u8q041ds6a2mktpm \
+    --discovery-token-ca-cert-hash sha256:109e5cea8a867b6b2ab24147ff1e76399976c127400c42e950ef47b3cfb74579
  ```
  
- 
-## /etc/systemd/system/kubelet.service
-```
-[Unit]
-Description=kubelet: The Kubernetes Node Agent
-Documentation=http://kubernetes.io/docs/
+::: warning 
+但是，token 在两小时内会过期。超过两小时操作的话，上面提示的这些内容就无法执行了，要加入集群除了需要 重新生成一个新的token，同时还需要 Master 节点的 ca 证书 sha256 编码 hash 值
+:::
 
-[Service]
-ExecStart=/usr/bin/kubelet
-Restart=always
-StartLimitInterval=0
-RestartSec=10
+```sh
+#重新建立token
+kubeadmin token create
+# 获取现有证书的sha hash值
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+# 然后用获取到的token和sha256，替换到join指令里面就行
+```
+# 安装calico网络，以及dashboard
 
-[Install]
-WantedBy=multi-user.target
+dashboard的安装在 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/ 有说明
 ```
-
-## /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+curl https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml -o recommended.yaml
 ```
-# Note: This dropin only works with kubeadm and kubelet v1.11+
-[Service]
-Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf"
-Environment="KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml"
-# This is a file that "kubeadm init" and "kubeadm join" generates at runtime, populating the KUBELET_KUBEADM_ARGS variable dynamically
-EnvironmentFile=-/var/lib/kubelet/kubeadm-flags.env
-# This is a file that the user can use for overrides of the kubelet args as a last resort. Preferably, the user should use
-# the .NodeRegistration.KubeletExtraArgs object in the configuration files instead. KUBELET_EXTRA_ARGS should be sourced from this file.
-EnvironmentFile=-/etc/default/kubelet
-ExecStart=
-ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS
-```
-
-## FAQ1 
-```
-[shejiyuan@app91 ~]$ kubectl get node
-Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "kubernetes")
-```
+在recommended.yaml将镜像指向本地仓库
+另外在NodePort的配置中添加 nodePort:30000,将端口映射到30000端口
 
 
-haproxy的安装
+```
+kubectl create -f calico.yaml
+kubectl create -f recommended.yaml
+```
+## k8s安装ceph支持
+
+参照 https://docs.ceph.com/docs/master/rbd/rbd-kubernetes/ 这里的说明按顺序执行yml文件
+
+在相关镜像已经推送到镜像服务器的情况下，可以执行
+
+> kubectl apply -f csi-config-map.yaml
+> kubectl apply -f csi-rbd-secret.yaml
+> kubectl apply -f csi-provisioner-rbac.yaml
+> kubectl apply -f csi-nodeplugin-rbac.yaml
+> kubectl apply -f csi-rbdplugin-provisioner.yaml
+> kubectl apply -f csi-rbdplugin.yaml
+> kubectl apply -f csi-rbd-sc.yaml
+
+# tips 
+
+## chrome浏览器打开https://localhost:port 的时候，出现NET::ERR_CERT_INVALID错误
+* 在chrome中输入 chrome://flags/
+* 将 Allow invalid certificates for resources loaded from localhost 改为enable
+* 重新启动浏览器
+
+## 解决在master节点上无法部署pod的问题
+k8s 基于安全考虑，在一般情况下是不能直接在master节点上部署pod的，除非手动解除这个限制。
+```
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+## 控制面haproxy的安装（可选操作）
+如果要确保kube api server 的高可用，需要额外做一个haproxy，确保控制面的高可用访问。例如以下配置将三个master 的 6443 端口，映射到19999端口，这样可以确保19999可以高可用访问控制面
 ```
 yum install haproxy
 ```
@@ -228,36 +217,22 @@ listen  controlPlaneNode
 ```
 service start haproxy
 ```
-默认的安装控制面要拉外网镜像
+## kubectl 执行时提示证书错误
+```
+kubectl get node
+Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "kubernetes")
+```
+可能是证书没有拷贝到本地路径下
+```
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+## 默认的安装控制面总是先尝试拉外网镜像
 ```
 sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" --upload-certs
 ```
-访问dashboard的方法
-首先获取token
+
+## 访问dashboard的时候需要获取token
 ```
-kubectl proxy
 kubectl -n kube-system describe $(kubectl -n kube-system get secret -n kube-system -o name | grep namespace) | grep token
 ```
-访问网址
-```
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-```
-# k8s安装ceph支持
-
-参照 https://docs.ceph.com/docs/master/rbd/rbd-kubernetes/ 这里的说明按顺序执行yml文件
-
-> kubectl apply -f csi-config-map.yaml
-> kubectl apply -f csi-rbd-secret.yaml
-> kubectl apply -f csi-provisioner-rbac.yaml
-> kubectl apply -f csi-nodeplugin-rbac.yaml
-> kubectl apply -f csi-rbdplugin-provisioner.yaml
-> kubectl apply -f csi-rbdplugin.yaml
-> kubectl apply -f csi-rbd-sc.yaml
-
-# tips 
-
-## chrome浏览器打开https://localhost:port 的时候，出现NET::ERR_CERT_INVALID错误
-* 在chrome中输入 chrome://flags/
-* 将 Allow invalid certificates for resources loaded from localhost 改为enable
-* 重新启动浏览器
-
