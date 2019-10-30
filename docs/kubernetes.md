@@ -223,7 +223,84 @@ kubeadm join 192.169.5.180:19999 --token hm0ci6.u8q041ds6a2mktpm \
     --discovery-token-ca-cert-hash sha256:109e5cea8a867b6b2ab24147ff1e76399976c127400c42e950ef47b3cfb74579 \
     --control-plane
 ```
-
+## 部署一个最简单的应用
+我们来创建一个web服务
+```yaml
+FROM python:2.7-alpine
+WORKDIR /root
+COPY ran.py /root
+CMD python /root/ran.py;python -m SimpleHTTPServer 8080
+```
+其中，ran.py如下
+```py
+import random,sys
+doc = open('/root/index.html','w+')
+doc.write(str(random.randint(10, 100)))
+doc.close()
+```
+build完以后，镜像名称为simpleweb，并将镜像推送到镜像仓库
+```sh
+docker tag simpleweb 192.169.5.7:5000/simpleweb:latest
+docker push 192.169.5.7:5000/simpleweb:latest
+```
+然后编写一个deployment
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: simplewebservice
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+  selector:
+    app: simpleweb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myweb
+spec:
+  selector:
+    matchLabels:
+      app: simpleweb
+  template:
+    metadata:
+      labels:
+        app: simpleweb
+    spec:
+      containers:
+      - image: 192.169.5.7:5000/simpleweb:latest
+        name: simpleweb
+        ports:
+          - containerPort: 8080
+```
+部署这个应用
+```
+kubectl create -f simpleweb.yaml
+```
+这个时候，可以看到在dashboard上有一个nodePort 的service
+```
+simplewebservice:31982 TCP
+```
+这个31982就是分配在worker节点上的端口号。
+访问每个主机的127.0.0.1:31982，都可以访问到这个应用
+为了便于外部访问，可以开启一个proxy
+```
+kube proxy
+```
+这样可以通过以下链接访问
+```sh
+http://127.0.0.1:8001/api/v1/namespaces/default/services/simplewebservice/proxy/
+```
+访问路径遵循以下规律
+```
+http://kubernetes_master_address/api/v1/namespaces/namespace_name/services/service_name[:port_name]/proxy
+```
+通过以下指令，可以随时扩展多个副本
+```
+kubectl scale --replicas=5 -f simpleweb.yaml
+```
 ## tips 
 
 ### dashboard访问时报证书错误
