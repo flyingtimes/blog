@@ -80,7 +80,7 @@ systemctl stop firewalld && systemctl disable firewalld
 swapoff -a || true
 setenforce 0 || true
 ```
-## 解压缩tar文件，然后将二进制文件拷贝到目标路径
+### 解压缩tar文件，然后将二进制文件拷贝到目标路径
 
 ```
 tar -xvzf kubernetes-server-linux-amd64.tar.gz
@@ -179,19 +179,20 @@ kubectl create -f recommended.yaml
 > kubectl apply -f csi-rbdplugin.yaml
 > kubectl apply -f csi-rbd-sc.yaml
 
-# tips 
+## tips 
 
-## chrome浏览器打开https://localhost:port 的时候，出现NET::ERR_CERT_INVALID错误
+### dashboard访问时报证书错误
+打开https://localhost:port 的时候，出现NET::ERR_CERT_INVALID错误
 * 在chrome中输入 chrome://flags/
 * 将 Allow invalid certificates for resources loaded from localhost 改为enable
 * 重新启动浏览器
 
-## 解决在master节点上无法部署pod的问题
+### 解决在master节点上无法部署pod的问题
 k8s 基于安全考虑，在一般情况下是不能直接在master节点上部署pod的，除非手动解除这个限制。
 ```
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
-## 控制面haproxy的安装（可选操作）
+### 控制面haproxy的安装（可选操作）
 如果要确保kube api server 的高可用，需要额外做一个haproxy，确保控制面的高可用访问。例如以下配置将三个master 的 6443 端口，映射到19999端口，这样可以确保19999可以高可用访问控制面
 ```
 yum install haproxy
@@ -213,7 +214,7 @@ listen  controlPlaneNode
 ```
 service start haproxy
 ```
-## kubectl 执行时提示证书错误
+### kubectl 执行时提示证书错误
 ```
 kubectl get node
 Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "kubernetes")
@@ -223,12 +224,12 @@ Unable to connect to the server: x509: certificate signed by unknown authority (
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-## 默认的安装控制面总是先尝试拉外网镜像
+### 默认的安装控制面总是先尝试拉外网镜像
 ```
 sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" --upload-certs
 ```
 
-## 访问dashboard的时候需要获取token
+### 访问dashboard的时候需要获取token
 ```
 kubectl -n kube-system describe $(kubectl -n kube-system get secret -n kube-system -o name | grep namespace) | grep token
 ```
