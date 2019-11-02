@@ -356,3 +356,211 @@ sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT
 ```
 kubectl -n kube-system describe $(kubectl -n kube-system get secret -n kube-system -o name | grep namespace) | grep token
 ```
+
+## 常用命令
+### k8s管理应用的命令
+#### 通过yaml文件创建
+```
+kubectl create -f xxx.yaml （不建议使用，无法更新，必须先delete）
+kubectl apply -f xxx.yaml （创建+更新，可以重复使用）
+```
+#### 通过yaml文件删除
+```
+kubectl delete -f xxx.yaml
+```
+#### 查看namespace下面的pod/svc/deployment
+```
+kubectl get pod /svc/deployment -n kube-system
+kubectl get pod /svc/deployment -n kube-system -o wide （查看存在哪个对应的节点）
+```
+#### 查看所有namespace下面的pod/svc/deployment
+```
+kubectl get pod/svc/deployment --all-namcpaces
+```
+#### 查看所有pod
+```
+kubectl get pod -n kube-system
+```
+#### 查看pod描述
+```
+kubectl describe pod XXX -n kube-system
+```
+#### 查看pod 日志 
+```
+kubectl logs xxx -n kube-system（如果pod有多个容器需要加-c 容器名）
+```
+#### 删除应用
+```
+kubectl delete deployment xxx -n kube-system
+```
+#### 根据label删除
+```
+kubectl delete pod -l app=flannel -n kube-system
+```
+#### 扩容
+```
+kubectl scale deployment spark-worker-deployment --replicas=8
+```
+#### 导出proxy配置文件
+```
+kubectl get ds -n kube-system -l k8s-app=kube-proxy -o yaml>kube-proxy-ds.yaml
+```
+#### 导出kube-dns
+```
+kubectl get deployment -n kube-system -l k8s-app=kube-dns -o yaml >kube-dns-dp.yaml
+kubectl get services -n kube-system -l k8s-app=kube-dns -o yaml >kube-dns-services.yaml
+```
+#### 导出所有 configmap
+```
+kubectl get configmap -n kube-system -o wide -o yaml > configmap.yaml
+```
+### 系统维护命令
+#### 重启kubelet服务
+```
+systemctl daemon-reload
+systemctl restart kubelet
+```
+修改启动参数
+```
+vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+```
+#### 查看集群信息
+```
+kubectl cluster-info
+```
+#### 查看各组件信息
+```
+kubectl get componentstatuses
+```
+#### 查看kubelet进程启动参数
+```
+ps -ef | grep kubelet
+```
+#### 查看日志
+```
+sudo journalctl -u kubelet -f
+```
+#### 设为不可调度状态
+```
+kubectl cordon node1
+```
+#### 将pod赶到其他节点
+```
+kubectl drain node1
+```
+#### 解除不可调度状态
+```
+kubectl uncordon node1
+```
+#### master运行pod
+```
+kubectl taint nodes master.k8s node-role.kubernetes.io/master-
+```
+#### master不运行pod
+```
+kubectl taint nodes master.k8s node-role.kubernetes.io/master=:NoSchedule
+```
+#### 获取集群的基本信息
+```
+kubectl cluster-info
+kubectl cluster-info dump
+kubectl get nodes
+kubectl get namespaces
+kubectl get deployment --all-namespaces
+kubectl get svc --all-namespaces
+kubectl get pod
+kubectl get pod -o wide --all-namespaces
+kubectl logs podName
+```
+#### 创建pod或srv
+```
+kubectl create -f development.yaml
+```
+#### 检查将要运行的 Pod 的资源状况
+```
+kubectl describe pod podName
+```
+#### 删除 Pod
+```
+kubectl delete pod podName
+```
+#### pod有多少副本
+```
+kubectl get rc
+```
+#### 扩展 Pod
+```
+kubectl scale --replicas=3 rc podName
+```
+#### 删除
+```
+kubectl delete deployment kubernetes-dashboard --namespace=kube-system
+kubectl delete svc kubernetes-dashboard --namespace=kube-system
+kubectl delete -f kubernetes-dashboard.yaml
+```
+#### 进入pod
+```
+kubectl exec -ti podName /bin/bash
+```
+### 查看类命令
+```
+获取节点相应服务的信息 ： kubectl get pods 按selector名来查找pod： kubectl get pod --selector name=redis
+查看集群信息： kubectl cluster-info
+查看各组件信息： kubectl -s http://localhost:8080 get componentstatuses 或 kubectl get cs
+查看pods所在的运行节点: kubectl gkubectl get pods -o yamlet pods -o wide
+查看pods定义的详细信息： kubectl get pods -o yaml
+查看运行pod的环境变量： kubectl exec pod名 env
+查看指定pod的日志： kubectl logs -f pods/heapster-xxxxx -n kube-system
+```
+### 操作类命令
+```
+创建资源： kubectl apply -f 文件名.yaml kubectl create -f 文件名.yaml
+重建资源： kubectl replace -f 文件名 [--force]
+删除资源： kubectl delete -f 文件名、kubectl delete pod pod名、kubectl delete rc rc名、kubectl delete service service名
+```
+### kubectl进阶命令操作
+#### kubectl get
+```
+获取指定资源的基本信息 kubectl get services kubernetes-dashboard -n kube-system #查看所有service
+kubectl get deployment kubernetes-dashboard -n kube-system #查看所有发布
+kubectl get pods --all-namespaces #查看所有pod
+kubectl get pods -o wide --all-namespaces #查看所有pod的IP及节点
+kubectl get pods -n kube-system | grep dashboard
+kubectl get nodes -l zone #获取zone的节点
+```
+#### kubectl describe
+```
+查看指定资源详细描述信息 kubectl describe service/kubernetes-dashboard --namespace="kube-system"
+kubectl describe pods/kubernetes-dashboard-349859023-g6q8c --namespace="kube-system" #指定类型查看
+kubectl describe pod nginx-772ai #查看pod详细信息
+kubectl scale：动态伸缩 kubectl scale rc nginx --replicas=5 # 动态伸缩
+kubectl scale deployment redis-slave --replicas=5 #动态伸缩
+kubectl scale --replicas=2 -f redis-slave-deployment.yaml #动态伸缩
+kubectl exec：进入pod启动的容器 kubectl exec -it redis-master-1033017107-q47hh /bin/bash #进入容器
+```
+#### kubectl label
+添加label值 kubectl label nodes node1 zone=north #增加节点lable值 spec.nodeSelector: zone: north #指定pod在哪个节点
+```
+kubectl label pod redis-master-1033017107-q47hh role=master #增加lable值 [key]=[value]
+kubectl label pod redis-master-1033017107-q47hh role- #删除lable值
+kubectl label pod redis-master-1033017107-q47hh role=backend --overwrite #修改lable值
+```
+#### kubectl rolling-update
+滚动升级 
+```
+kubectl rolling-update redis-master -f redis-master-controller-v2.yaml #配置文件滚动升级
+kubectl rolling-update redis-master --image=redis-master:2.0 #命令升级
+kubectl rolling-update redis-master --image=redis-master:1.0 --rollback #pod版本回滚
+```
+### etcdctl常用操作
+> https://www.kubernetes.org.cn/5021.html 
+```
+#检查网络集群健康状态
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt  endpoint health
+# 检查成员情况
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt member list
+# 检查性能
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt check perf 
+# 日常操作 get/put
+https://etcd.io/docs/v3.3.12/demo/
+```
