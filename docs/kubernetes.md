@@ -552,7 +552,7 @@ kubectl rolling-update redis-master -f redis-master-controller-v2.yaml #配置�
 kubectl rolling-update redis-master --image=redis-master:2.0 #命令升级
 kubectl rolling-update redis-master --image=redis-master:1.0 --rollback #pod版本回滚
 ```
-### etcdctl常用操作
+### etcdctl常用操作(要进入容器里操作)
 > https://www.kubernetes.org.cn/5021.html 
 ```
 #检查网络集群健康状态
