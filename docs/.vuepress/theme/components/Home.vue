@@ -79,7 +79,7 @@ export default {
   .hero
     img
       max-width: 100%
-      max-height 280px
+      max-height 400px
       display block
       margin 3rem auto 1.5rem
       border-radius 50px
