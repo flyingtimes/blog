@@ -452,6 +452,10 @@ kubectl drain node1
 ```
 kubectl uncordon node1
 ```
+#### node节点处于schedulingdisabled状态
+``` 
+kubectl patch node app91 -p '{"spec":{"unschedulable":false}}'
+```
 #### master运行pod
 ```
 kubectl taint nodes master.k8s node-role.kubernetes.io/master-

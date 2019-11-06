@@ -369,3 +369,42 @@ cordova build android
 ```
 #### 手机端编译
 如果是web或者android，只要android开发环境装好了，那就可以直接出来apk或者h5的内容了。但是如果是ios，还需要在xocde里面，打开编译好的路径，再用xcode编译一次。这样才能大功告成。
+
+## 如何自己写一个npm 的模块
+### 2019.11.6
+
+> 要坚持写日课还挺难的，一眨眼又停更了1周。佩服那些每天写小说的。
+
+#### 几个必须的步骤需要准备
+* 到npmjs.org注册账号
+* npm login 自己的账号
+* registry要设置到官网
+* npm init(每次修改要执行，并更新版本号)
+* npm publish
+
+举个例子，你创建一个模块项目,在根目录生产index.js
+```js
+function print(name) {
+  console.log('you enter name is :%s', name);
+};
+module.exports = print;
+```
+然后注册你的这个模块your-module
+```sh
+npm init
+npm publish
+```
+npm init的时候会问一些个人信息，模块信息，回答完毕后就发布啦
+这时候，在任何你的项目里面可以下载这个模块了
+```sh
+npm install your-module
+```
+main.js
+```js
+const print = require('your-module');
+print('welcome you!');
+```
+####  包不需要的时候想要删除
+```sh
+npm unpublish your-module --force 
+```
