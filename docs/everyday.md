@@ -408,3 +408,4 @@ print('welcome you!');
 ```sh
 npm unpublish your-module --force 
 ```
+> 按照上面的思路，我成功的发布了我的第一个模块，这是一个markdown-it 插件，https://github.com/flyingtimes/markdown-it-alarm
