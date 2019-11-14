@@ -389,6 +389,11 @@ kubectl describe pod XXX -n kube-system
 ```
 kubectl logs xxx -n kube-system（如果pod有多个容器需要加-c 容器名）
 ```
+#### 容器失败的日志查询
+```
+kubectl get events -n namespace
+```
+
 #### 删除应用
 ```
 kubectl delete deployment xxx -n kube-system
