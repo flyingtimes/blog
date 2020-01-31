@@ -412,6 +412,10 @@ npm unpublish your-module --force
 
 ### 2020.2.1
 #### 用rsync将目录备份到远程服务器
+新冠病毒阴霾下，突然发现自己已经停更了三个月了。惭愧惭愧。
 ```
 rsync -av --progress [src_dir] user@host/[work_path]
+例如:
+rsync -av --progress . root@naslocal/root/Rsync/
+
 ```
