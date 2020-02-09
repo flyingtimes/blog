@@ -419,3 +419,8 @@ rsync -av --progress [src_dir] user@host/[work_path]
 rsync -av --progress . root@naslocal/root/Rsync/
 
 ```
+
+### 2020.2.10
+#### 一个好的php入门网站
+
+https://laravel-china.github.io/php-the-right-way/
