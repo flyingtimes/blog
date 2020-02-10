@@ -424,3 +424,6 @@ rsync -av --progress . root@naslocal/root/Rsync/
 #### 一个好的php入门网站
 
 https://laravel-china.github.io/php-the-right-way/
+
+#### laravel 控制反转相关内容
+https://segmentfault.com/a/1190000015072320
