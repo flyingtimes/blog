@@ -409,3 +409,21 @@ print('welcome you!');
 npm unpublish your-module --force 
 ```
 > 按照上面的思路，我成功的发布了我的第一个模块，这是一个markdown-it 插件，https://github.com/flyingtimes/markdown-it-alarm
+
+### 2020.2.1
+#### 用rsync将目录备份到远程服务器
+新冠病毒阴霾下，突然发现自己已经停更了三个月了。惭愧惭愧。
+```
+rsync -av --progress [src_dir] user@host/[work_path]
+例如:
+rsync -av --progress . root@naslocal/root/Rsync/
+
+```
+
+### 2020.2.10
+#### 一个好的php入门网站
+
+https://laravel-china.github.io/php-the-right-way/
+
+#### laravel 控制反转相关内容
+https://segmentfault.com/a/1190000015072320
