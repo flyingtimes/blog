@@ -14,7 +14,7 @@ keywords:
 
 ## Kubernetes核心组件组成
 
-* etcd保存了整个集群的状态
+* etcd保存了整个集群的状态，采用raft算法，因此最少需要三节点。
 * apiserver提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现等机制
 * controller manager负责维护集群的状态，比如故障检测、自动扩展、滚动更新
 * scheduler负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上
