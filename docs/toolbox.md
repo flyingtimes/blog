@@ -69,3 +69,6 @@ https://www.bobobk.com/258.html
 
 ## 广州热门学位房小区信息
 ![avatar](house.jpg)
+
+## 用ai技术来3d建模人的模型（模型师下岗）
+https://www.reallusion.com/
