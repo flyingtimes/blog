@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>K8S | clark的技术博客</title>
+    <meta name="description" content="记录日常点滴技术">
+    
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.fd97359f.css" as="style"><link rel="preload" href="/blog/assets/js/app.a3499603.js" as="script"><link rel="preload" href="/blog/assets/js/4.d75981d8.js" as="script"><link rel="preload" href="/blog/assets/js/2.7f01df2c.js" as="script"><link rel="preload" href="/blog/assets/js/12.50475fa0.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.7ea914db.js"><link rel="prefetch" href="/blog/assets/js/11.1dde0139.js"><link rel="prefetch" href="/blog/assets/js/13.2747ab66.js"><link rel="prefetch" href="/blog/assets/js/14.a8915311.js"><link rel="prefetch" href="/blog/assets/js/15.485dff63.js"><link rel="prefetch" href="/blog/assets/js/16.26a9cb35.js"><link rel="prefetch" href="/blog/assets/js/17.a371fabd.js"><link rel="prefetch" href="/blog/assets/js/18.00857e26.js"><link rel="prefetch" href="/blog/assets/js/3.a4413db2.js"><link rel="prefetch" href="/blog/assets/js/5.8b93cd5a.js"><link rel="prefetch" href="/blog/assets/js/6.6ad373fa.js"><link rel="prefetch" href="/blog/assets/js/7.7a8ff17b.js"><link rel="prefetch" href="/blog/assets/js/8.5a78f3e3.js"><link rel="prefetch" href="/blog/assets/js/9.f8bd3ece.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.fd97359f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">clark的技术博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">首页</a></div><div class="nav-item"><a href="/blog/everyday.html" class="nav-link">日课</a></div><div class="nav-item"><a href="/blog/kubernetes.html" class="nav-link router-link-exact-active router-link-active">K8S</a></div><div class="nav-item"><a href="/blog/toolbox.html" class="nav-link">百宝箱</a></div><div class="nav-item"><a href="/blog/listarticles.html" class="nav-link">所有文章</a></div><div class="nav-item"><a href="/blog/author.html" class="nav-link">作者简介</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">首页</a></div><div class="nav-item"><a href="/blog/everyday.html" class="nav-link">日课</a></div><div class="nav-item"><a href="/blog/kubernetes.html" class="nav-link router-link-exact-active router-link-active">K8S</a></div><div class="nav-item"><a href="/blog/toolbox.html" class="nav-link">百宝箱</a></div><div class="nav-item"><a href="/blog/listarticles.html" class="nav-link">所有文章</a></div><div class="nav-item"><a href="/blog/author.html" class="nav-link">作者简介</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>K8S</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/kubernetes.html#kubernetes核心组件组成" class="sidebar-link">Kubernetes核心组件组成</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/kubernetes.html#在外网机器上的准备工作" class="sidebar-link">在外网机器上的准备工作</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#准备离线镜像文件" class="sidebar-link">准备离线镜像文件</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#将生成的镜像倒入到内网" class="sidebar-link">将生成的镜像倒入到内网</a></li></ul></li><li><a href="/blog/kubernetes.html#k8s集群的配置" class="sidebar-link">k8s集群的配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#解压缩tar文件，然后将二进制文件拷贝到目标路径" class="sidebar-link">解压缩tar文件，然后将二进制文件拷贝到目标路径</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#配置-kubelet" class="sidebar-link">配置 kubelet</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#启动k8s" class="sidebar-link">启动K8S</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#安装calico网络，以及dashboard" class="sidebar-link">安装calico网络，以及dashboard</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#k8s安装ceph支持" class="sidebar-link">k8s安装ceph支持</a></li></ul></li><li><a href="/blog/kubernetes.html#master节点倒了如何重建" class="sidebar-link">master节点倒了如何重建</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/kubernetes.html#部署一个最简单的应用" class="sidebar-link">部署一个最简单的应用</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/kubernetes.html#tips" class="sidebar-link">tips</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#dashboard访问时报证书错误" class="sidebar-link">dashboard访问时报证书错误</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#解决在master节点上无法部署pod的问题" class="sidebar-link">解决在master节点上无法部署pod的问题</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#控制面haproxy的安装（可选操作）" class="sidebar-link">控制面haproxy的安装（可选操作）</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#kubectl-执行时提示证书错误" class="sidebar-link">kubectl 执行时提示证书错误</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#默认的安装控制面总是先尝试拉外网镜像" class="sidebar-link">默认的安装控制面总是先尝试拉外网镜像</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#访问dashboard的时候需要获取token" class="sidebar-link">访问dashboard的时候需要获取token</a></li></ul></li><li><a href="/blog/kubernetes.html#常用命令" class="sidebar-link">常用命令</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#k8s管理应用的命令" class="sidebar-link">k8s管理应用的命令</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#系统维护命令" class="sidebar-link">系统维护命令</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#查看类命令" class="sidebar-link">查看类命令</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#操作类命令" class="sidebar-link">操作类命令</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#kubectl进阶命令操作" class="sidebar-link">kubectl进阶命令操作</a></li><li class="sidebar-sub-header"><a href="/blog/kubernetes.html#etcdctl常用操作-要进入容器里操作" class="sidebar-link">etcdctl常用操作(要进入容器里操作)</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="kubernetes-高可用集群安装"><a href="#kubernetes-高可用集群安装" class="header-anchor">#</a> kubernetes 高可用集群安装</h1> <p>参考资料</p> <blockquote><p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/" target="_blank" rel="noopener noreferrer">https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote> <h2 id="kubernetes核心组件组成"><a href="#kubernetes核心组件组成" class="header-anchor">#</a> Kubernetes核心组件组成</h2> <ul><li>etcd保存了整个集群的状态，采用raft算法，因此最少需要三节点。</li> <li>apiserver提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现等机制</li> <li>controller manager负责维护集群的状态，比如故障检测、自动扩展、滚动更新</li> <li>scheduler负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上</li> <li>kubelet负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理</li> <li>Container runtime负责镜像管理以及Pod和容器的真正运行（CRI）</li> <li>kube-proxy负责为Service提供cluster内部的服务发现和负载均衡</li></ul> <p>除了核心组件，还有一些推荐的Add-ons</p> <ul><li>kube-dns负责为整个集群提供DNS服务</li> <li>Ingress Controller为服务提供外网入口</li> <li>Heapster提供资源监控</li> <li>Dashboard提供GUI</li> <li>Federation提供跨可用区的集群</li> <li>Fluentd-elasticsearch提供集群日志采集、存储与查询</li></ul> <h2 id="在外网机器上的准备工作"><a href="#在外网机器上的准备工作" class="header-anchor">#</a> 在外网机器上的准备工作</h2> <ul><li>外网机器需要拉镜像，因此最好具备翻墙条件</li> <li>安装好docker</li> <li>安装 kubeadm</li></ul> <p>先到这里确定当前最新的k8s版本
+<a href="https://github.com/kubernetes/kubernetes/releases" target="_blank" rel="noopener noreferrer">https://github.com/kubernetes/kubernetes/releases<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>
+我在此时看到的最新版本是v1.16.2
+KUBE_VERSION=v1.16.2</p> <h3 id="准备离线镜像文件"><a href="#准备离线镜像文件" class="header-anchor">#</a> 准备离线镜像文件</h3> <p>可以通过kubeadmin工具来获取离线镜像文件</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 下载三件套工具集</span>
+<span class="token function">wget</span> https://dl.k8s.io/<span class="token punctuation">{</span>KUBE_VERSION<span class="token punctuation">}</span>/kubernetes-server-linux-amd64.tar.gz
+<span class="token comment"># 添加apt源</span>
+<span class="token function">curl</span> -s https://packages.cloud.google.com/apt/doc/apt-key.gpg <span class="token operator">|</span> apt-key <span class="token function">add</span> -
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span>EOF <span class="token operator">&gt;</span> /etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+<span class="token comment"># 安装 docker，kubeadmin</span>
+<span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> -y docker.io kubeadm
+<span class="token comment"># 获取相应版本的镜像信息</span>
+kubeadm config images list --kubernetes-version<span class="token operator">=</span><span class="token punctuation">{</span><span class="token variable">$KUBE_VERSION</span><span class="token punctuation">}</span>
+<span class="token comment"># 用kubeadmin工具，生成拉去镜像的配置yml文件</span>
+kubeadm config print init-defaults <span class="token operator">&gt;</span> kubeadm.yml
+<span class="token comment"># 拉取镜像</span>
+kubeadm config images pull --config kubeadm.yml
+<span class="token comment"># 将镜像到处成一个压缩包</span>
+docker save <span class="token variable"><span class="token variable">$(</span>docker images <span class="token operator">|</span> <span class="token function">grep</span> -v REPOSITORY <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'BEGIN{OFS=&quot;:&quot;;ORS=&quot; &quot;}{print <span class="token variable">$1</span>,<span class="token variable">$2</span>}'</span><span class="token variable">)</span></span> -o k8s<span class="token punctuation">{</span><span class="token variable">$KUBE_VERSION</span><span class="token punctuation">}</span>.tar
+</code></pre></div><h3 id="将生成的镜像倒入到内网"><a href="#将生成的镜像倒入到内网" class="header-anchor">#</a> 将生成的镜像倒入到内网</h3> <p>在内外安装目标主机上</p> <div class="language- extra-class"><pre class="language-text"><code>docker load -i k8s{$KUBE_VERSION}.tar
+</code></pre></div><h2 id="k8s集群的配置"><a href="#k8s集群的配置" class="header-anchor">#</a> k8s集群的配置</h2> <p>准备好三台centos操作系统的机器，例如app91，app92，app93
+每一台机器都需要做一些预先的配置</p> <div class="language- extra-class"><pre class="language-text"><code># 打开 ipvs
+modprobe -- ip_vs
+modprobe -- ip_vs_rr
+modprobe -- ip_vs_wrr
+modprobe -- ip_vs_sh
+modprobe -- nf_conntrack_ipv4
+# 添加k8s配置文件
+cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
+
+sysctl -w net.ipv4.ip_forward=1
+systemctl stop firewalld &amp;&amp; systemctl disable firewalld
+swapoff -a || true
+setenforce 0 || true
+</code></pre></div><h3 id="解压缩tar文件，然后将二进制文件拷贝到目标路径"><a href="#解压缩tar文件，然后将二进制文件拷贝到目标路径" class="header-anchor">#</a> 解压缩tar文件，然后将二进制文件拷贝到目标路径</h3> <div class="language- extra-class"><pre class="language-text"><code>tar -xvzf kubernetes-server-linux-amd64.tar.gz
+sudo cp ./kubernetes/server/bin/* /usr/bin/
+</code></pre></div><h3 id="配置-kubelet"><a href="#配置-kubelet" class="header-anchor">#</a> 配置 kubelet</h3> <div class="language- extra-class"><pre class="language-text"><code>curl -sSL &quot;https://raw.githubusercontent.com/kubernetes/kubernetes/${RELEASE}/build/debs/kubelet.service&quot; | sed &quot;s:/usr/bin:/opt/bin:g&quot; &gt; /etc/systemd/system/kubelet.service
+mkdir -p /etc/systemd/system/kubelet.service.d
+curl -sSL &quot;https://raw.githubusercontent.com/kubernetes/kubernetes/${RELEASE}/build/debs/10-kubeadm.conf&quot; | sed &quot;s:/usr/bin:/opt/bin:g&quot; &gt; /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+</code></pre></div><p>对照上面在内网操作以下脚本</p> <div class="language- extra-class"><pre class="language-text"><code>sudo mkdir -p /etc/systemd/system/kubelet.service.d
+sudo cp kubelet.service /etc/systemd/system/
+sudo cp 10-kubeadm.conf /etc/systemd/system/kubelet.service.d/
+systemctl enable --now kubelet
+systemctl enable --now kubelet
+systemctl status kubelet
+</code></pre></div><h3 id="启动k8s"><a href="#启动k8s" class="header-anchor">#</a> 启动K8S</h3> <p>假设192.169.5.180为master1的ip地址，kube api server 的端口为19999，那么</p> <div class="language- extra-class"><pre class="language-text"><code>kubeadm init --pod-network-cidr=10.244.0.0/16  \
+--control-plane-endpoint &quot;192.169.5.180:19999&quot; \
+--upload-certs --apiserver-advertise-address=0.0.0.0 \
+--kubernetes-version=v1.16.2
+</code></pre></div><p>返回的信息很丰富，包含以下几个内容
+你需要把init产生的证书和配置信息，拷贝到你的当前用户下，否则日后kubeadm可能无法正常使用</p> <div class="language- extra-class"><pre class="language-text"><code>Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+ mkdir -p $HOME/.kube
+ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+</code></pre></div><p>你可以增加一个master节点</p> <div class="language- extra-class"><pre class="language-text"><code>You can now join any number of the control-plane node running the following command on each as root:
+
+ kubeadm join 192.169.5.180:19999 --token hm0ci6.u8q041ds6a2mktpm \
+   --discovery-token-ca-cert-hash sha256:109e5cea8a867b6b2ab24147ff1e76399976c127400c42e950ef47b3cfb74579 \
+   --control-plane --certificate-key 690707d154c80ceed893c6bd8a11520a401fd43df606aeafc27fe64e99b3a67f
+
+</code></pre></div><p>还可以增加worker节点</p> <div class="language- extra-class"><pre class="language-text"><code>kubeadm join 192.169.5.180:19999 --token hm0ci6.u8q041ds6a2mktpm \
+   --discovery-token-ca-cert-hash sha256:109e5cea8a867b6b2ab24147ff1e76399976c127400c42e950ef47b3cfb74579
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>但是，token 在两小时内会过期。超过两小时操作的话，上面提示的这些内容就无法执行了，要加入集群除了需要 重新生成一个新的token，同时还需要 Master 节点的 ca 证书 sha256 编码 hash 值</p></div> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment">#重新建立token</span>
+kubeadmin token create
+<span class="token comment"># 获取现有证书的sha hash值</span>
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt <span class="token operator">|</span> openssl rsa -pubin -outform der <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">|</span> openssl dgst -sha256 -hex <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/^.* //'</span>
+<span class="token comment"># 然后用获取到的token和sha256，替换到join指令里面就行</span>
+</code></pre></div><h3 id="安装calico网络，以及dashboard"><a href="#安装calico网络，以及dashboard" class="header-anchor">#</a> 安装calico网络，以及dashboard</h3> <p>dashboard的安装在 <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank" rel="noopener noreferrer">https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 有说明</p> <div class="language- extra-class"><pre class="language-text"><code>curl https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml -o recommended.yaml
+</code></pre></div><p>在recommended.yaml将镜像指向本地仓库
+另外在NodePort的配置中添加 nodePort:30000,将端口映射到30000端口</p> <div class="language- extra-class"><pre class="language-text"><code>kubectl create -f calico.yaml
+kubectl create -f recommended.yaml
+</code></pre></div><h3 id="k8s安装ceph支持"><a href="#k8s安装ceph支持" class="header-anchor">#</a> k8s安装ceph支持</h3> <p>参照 <a href="https://docs.ceph.com/docs/master/rbd/rbd-kubernetes/" target="_blank" rel="noopener noreferrer">https://docs.ceph.com/docs/master/rbd/rbd-kubernetes/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 这里的说明按顺序执行yml文件</p> <p>在相关镜像已经推送到镜像服务器的情况下，可以执行</p> <blockquote><p>kubectl apply -f csi-config-map.yaml</p></blockquote> <blockquote><p>kubectl apply -f csi-rbd-secret.yaml</p></blockquote> <blockquote><p>kubectl apply -f csi-provisioner-rbac.yaml</p></blockquote> <blockquote><p>kubectl apply -f csi-nodeplugin-rbac.yaml</p></blockquote> <blockquote><p>kubectl apply -f csi-rbdplugin-provisioner.yaml</p></blockquote> <blockquote><p>kubectl apply -f csi-rbdplugin.yaml</p></blockquote> <blockquote><p>kubectl apply -f csi-rbd-sc.yaml</p></blockquote> <h2 id="master节点倒了如何重建"><a href="#master节点倒了如何重建" class="header-anchor">#</a> master节点倒了如何重建</h2> <p>我们模拟一个master节点倒了的情况，例如将master的docker关闭了，再重新开起来
+首先，整个集群的状态，要经过一段较长的时间（大概15分钟），才能完全将节点倒掉的情况确认；光看dashboard可能看到的是部分容器还在正常执行，实际已经倒了
+等从dashboard上看到准确的状态以后，这时候不能急着将节点加入回来。因为集群目前还是认为有1个节点只是down了，并没有将这个节点删除的，需要删除节点。</p> <div class="language-sh extra-class"><pre class="language-sh"><code>kubectl remove node app91
+</code></pre></div><p>另外，虽然删除了k8s节点，但是etcd也有一个节点倒了，kubectl remove是不会管etcd的（各自可以独立部署的），因此需要手动将异常etcd节点删除。</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 登陆其中一个还活着的etcd容器</span>
+kubectl <span class="token builtin class-name">exec</span> -it etcd-app92 <span class="token function">sh</span> -n kube-system
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ETCDCTL_API</span><span class="token operator">=</span><span class="token number">3</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">etcdctl</span><span class="token operator">=</span><span class="token string">'etcdctl --endpoints=https://192.169.5.181:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key'</span>
+<span class="token comment"># 查看etcd节点状态</span>
+etcdctl member list
+<span class="token comment"># 找出已经失效的etcd 删除</span>
+etcdctl member remove xxxxx
+</code></pre></div><p>将异常的k8s节点从集群中删除</p> <div class="language- extra-class"><pre class="language-text"><code>kubectl remove node app91
+</code></pre></div><p>然后再重新将节点加入回来就可以了</p> <div class="language- extra-class"><pre class="language-text"><code>kubeadm join 192.169.5.180:19999 --token hm0ci6.u8q041ds6a2mktpm \
+    --discovery-token-ca-cert-hash sha256:109e5cea8a867b6b2ab24147ff1e76399976c127400c42e950ef47b3cfb74579 \
+    --control-plane
+</code></pre></div><h2 id="部署一个最简单的应用"><a href="#部署一个最简单的应用" class="header-anchor">#</a> 部署一个最简单的应用</h2> <p>我们来创建一个web服务</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code>FROM python<span class="token punctuation">:</span>2.7<span class="token punctuation">-</span>alpine
+WORKDIR /root
+COPY ran.py /root
+CMD python /root/ran.py;python <span class="token punctuation">-</span>m SimpleHTTPServer 8080
+</code></pre></div><p>其中，ran.py如下</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">import</span> random<span class="token punctuation">,</span>sys
+doc <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'/root/index.html'</span><span class="token punctuation">,</span><span class="token string">'w+'</span><span class="token punctuation">)</span>
+doc<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+doc<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>build完以后，镜像名称为simpleweb，并将镜像推送到镜像仓库</p> <div class="language-sh extra-class"><pre class="language-sh"><code>docker tag simpleweb <span class="token number">192.169</span>.5.7:5000/simpleweb:latest
+docker push <span class="token number">192.169</span>.5.7:5000/simpleweb:latest
+</code></pre></div><p>然后编写一个deployment</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Service
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> simplewebservice
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> NodePort
+  <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8080</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> simpleweb
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> myweb
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> simpleweb
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> simpleweb
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">image</span><span class="token punctuation">:</span> 192.169.5.7<span class="token punctuation">:</span>5000/simpleweb<span class="token punctuation">:</span>latest
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> simpleweb
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">8080</span>
+</code></pre></div><p>部署这个应用</p> <div class="language- extra-class"><pre class="language-text"><code>kubectl create -f simpleweb.yaml
+</code></pre></div><p>这个时候，可以看到在dashboard上有一个nodePort 的service</p> <div class="language- extra-class"><pre class="language-text"><code>simplewebservice:31982 TCP
+</code></pre></div><p>这个31982就是分配在worker节点上的端口号。
+访问每个主机的127.0.0.1:31982，都可以访问到这个应用
+为了便于外部访问，可以开启一个proxy</p> <div class="language- extra-class"><pre class="language-text"><code>kube proxy
+</code></pre></div><p>这样可以通过以下链接访问</p> <div class="language-sh extra-class"><pre class="language-sh"><code>http://127.0.0.1:8001/api/v1/namespaces/default/services/simplewebservice/proxy/
+</code></pre></div><p>访问路径遵循以下规律</p> <div class="language- extra-class"><pre class="language-text"><code>http://kubernetes_master_address/api/v1/namespaces/namespace_name/services/service_name[:port_name]/proxy
+</code></pre></div><p>通过以下指令，可以随时扩展多个副本</p> <div class="language- extra-class"><pre class="language-text"><code>kubectl scale --replicas=5 -f simpleweb.yaml
+</code></pre></div><h2 id="tips"><a href="#tips" class="header-anchor">#</a> tips</h2> <h3 id="dashboard访问时报证书错误"><a href="#dashboard访问时报证书错误" class="header-anchor">#</a> dashboard访问时报证书错误</h3> <p>打开 <a href="https://127.0.0.1:8080" target="_blank" rel="noopener noreferrer">https://127.0.0.1:8080<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 的时候，出现NET::ERR_CERT_INVALID错误</p> <ul><li>在chrome中输入 chrome://flags/</li> <li>将 Allow invalid certificates for resources loaded from localhost 改为enable</li> <li>重新启动浏览器</li></ul> <h3 id="解决在master节点上无法部署pod的问题"><a href="#解决在master节点上无法部署pod的问题" class="header-anchor">#</a> 解决在master节点上无法部署pod的问题</h3> <p>k8s 基于安全考虑，在一般情况下是不能直接在master节点上部署pod的，除非手动解除这个限制。</p> <div class="language- extra-class"><pre class="language-text"><code>kubectl taint nodes --all node-role.kubernetes.io/master-
+</code></pre></div><h3 id="控制面haproxy的安装（可选操作）"><a href="#控制面haproxy的安装（可选操作）" class="header-anchor">#</a> 控制面haproxy的安装（可选操作）</h3> <p>如果要确保kube api server 的高可用，需要额外做一个haproxy，确保控制面的高可用访问。例如以下配置将三个master 的 6443 端口，映射到19999端口，这样可以确保19999可以高可用访问控制面</p> <div class="language- extra-class"><pre class="language-text"><code>yum install haproxy
+</code></pre></div><div class="language-sh extra-class"><pre class="language-sh"><code>frontend k8s_lb
+        <span class="token builtin class-name">bind</span> *:19999
+        mode tcp
+        default_backend controlPlaneNode
+listen  controlPlaneNode
+        mode tcp
+        option tcplog
+        balance <span class="token builtin class-name">source</span>
+        server app91 app91:6443 weight <span class="token number">1</span> check inter <span class="token number">2000</span> rise <span class="token number">2</span> fall <span class="token number">3</span>
+        server app92 app92:6443 weight <span class="token number">1</span> check inter <span class="token number">2000</span> rise <span class="token number">2</span> fall <span class="token number">3</span>
+        server app93 app93:6443 weight <span class="token number">1</span> check inter <span class="token number">2000</span> rise <span class="token number">2</span> fall <span class="token number">3</span>
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>service start haproxy
+</code></pre></div><h3 id="kubectl-执行时提示证书错误"><a href="#kubectl-执行时提示证书错误" class="header-anchor">#</a> kubectl 执行时提示证书错误</h3> <div class="language- extra-class"><pre class="language-text"><code>kubectl get node
+Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of &quot;crypto/rsa: verification error&quot; while trying to verify candidate authority certificate &quot;kubernetes&quot;)
+</code></pre></div><p>可能是证书没有拷贝到本地路径下</p> <div class="language- extra-class"><pre class="language-text"><code>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</code></pre></div><h3 id="默认的安装控制面总是先尝试拉外网镜像"><a href="#默认的安装控制面总是先尝试拉外网镜像" class="header-anchor">#</a> 默认的安装控制面总是先尝试拉外网镜像</h3> <div class="language- extra-class"><pre class="language-text"><code>sudo kubeadm init --control-plane-endpoint &quot;LOAD_BALANCER_DNS:LOAD_BALANCER_PORT&quot; --upload-certs
+</code></pre></div><h3 id="访问dashboard的时候需要获取token"><a href="#访问dashboard的时候需要获取token" class="header-anchor">#</a> 访问dashboard的时候需要获取token</h3> <div class="language- extra-class"><pre class="language-text"><code>kubectl -n kube-system describe $(kubectl -n kube-system get secret -n kube-system -o name | grep namespace) | grep token
+</code></pre></div><h2 id="常用命令"><a href="#常用命令" class="header-anchor">#</a> 常用命令</h2> <h3 id="k8s管理应用的命令"><a href="#k8s管理应用的命令" class="header-anchor">#</a> k8s管理应用的命令</h3> <h4 id="通过yaml文件创建"><a href="#通过yaml文件创建" class="header-anchor">#</a> 通过yaml文件创建</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl create -f xxx.yaml （不建议使用，无法更新，必须先delete）
+kubectl apply -f xxx.yaml （创建+更新，可以重复使用）
+</code></pre></div><h4 id="通过yaml文件删除"><a href="#通过yaml文件删除" class="header-anchor">#</a> 通过yaml文件删除</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl delete -f xxx.yaml
+</code></pre></div><h4 id="查看namespace下面的pod-svc-deployment"><a href="#查看namespace下面的pod-svc-deployment" class="header-anchor">#</a> 查看namespace下面的pod/svc/deployment</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get pod /svc/deployment -n kube-system
+kubectl get pod /svc/deployment -n kube-system -o wide （查看存在哪个对应的节点）
+</code></pre></div><h4 id="查看所有namespace下面的pod-svc-deployment"><a href="#查看所有namespace下面的pod-svc-deployment" class="header-anchor">#</a> 查看所有namespace下面的pod/svc/deployment</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get pod/svc/deployment --all-namcpaces
+</code></pre></div><h4 id="查看所有pod"><a href="#查看所有pod" class="header-anchor">#</a> 查看所有pod</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get pod -n kube-system
+</code></pre></div><h4 id="查看pod描述"><a href="#查看pod描述" class="header-anchor">#</a> 查看pod描述</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl describe pod XXX -n kube-system
+</code></pre></div><h4 id="查看pod-日志"><a href="#查看pod-日志" class="header-anchor">#</a> 查看pod 日志</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl logs xxx -n kube-system（如果pod有多个容器需要加-c 容器名）
+</code></pre></div><h4 id="容器失败的日志查询"><a href="#容器失败的日志查询" class="header-anchor">#</a> 容器失败的日志查询</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get events -n namespace
+</code></pre></div><h4 id="删除应用"><a href="#删除应用" class="header-anchor">#</a> 删除应用</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl delete deployment xxx -n kube-system
+</code></pre></div><h4 id="根据label删除"><a href="#根据label删除" class="header-anchor">#</a> 根据label删除</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl delete pod -l app=flannel -n kube-system
+</code></pre></div><h4 id="扩容"><a href="#扩容" class="header-anchor">#</a> 扩容</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl scale deployment spark-worker-deployment --replicas=8
+</code></pre></div><h4 id="导出proxy配置文件"><a href="#导出proxy配置文件" class="header-anchor">#</a> 导出proxy配置文件</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get ds -n kube-system -l k8s-app=kube-proxy -o yaml&gt;kube-proxy-ds.yaml
+</code></pre></div><h4 id="导出kube-dns"><a href="#导出kube-dns" class="header-anchor">#</a> 导出kube-dns</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get deployment -n kube-system -l k8s-app=kube-dns -o yaml &gt;kube-dns-dp.yaml
+kubectl get services -n kube-system -l k8s-app=kube-dns -o yaml &gt;kube-dns-services.yaml
+</code></pre></div><h4 id="导出所有-configmap"><a href="#导出所有-configmap" class="header-anchor">#</a> 导出所有 configmap</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get configmap -n kube-system -o wide -o yaml &gt; configmap.yaml
+</code></pre></div><h3 id="系统维护命令"><a href="#系统维护命令" class="header-anchor">#</a> 系统维护命令</h3> <h4 id="重启kubelet服务"><a href="#重启kubelet服务" class="header-anchor">#</a> 重启kubelet服务</h4> <div class="language- extra-class"><pre class="language-text"><code>systemctl daemon-reload
+systemctl restart kubelet
+</code></pre></div><p>修改启动参数</p> <div class="language- extra-class"><pre class="language-text"><code>vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+</code></pre></div><h4 id="查看集群信息"><a href="#查看集群信息" class="header-anchor">#</a> 查看集群信息</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl cluster-info
+</code></pre></div><h4 id="查看各组件信息"><a href="#查看各组件信息" class="header-anchor">#</a> 查看各组件信息</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get componentstatuses
+</code></pre></div><h4 id="查看kubelet进程启动参数"><a href="#查看kubelet进程启动参数" class="header-anchor">#</a> 查看kubelet进程启动参数</h4> <div class="language- extra-class"><pre class="language-text"><code>ps -ef | grep kubelet
+</code></pre></div><h4 id="查看日志"><a href="#查看日志" class="header-anchor">#</a> 查看日志</h4> <div class="language- extra-class"><pre class="language-text"><code>sudo journalctl -u kubelet -f
+</code></pre></div><h4 id="设为不可调度状态"><a href="#设为不可调度状态" class="header-anchor">#</a> 设为不可调度状态</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl cordon node1
+</code></pre></div><h4 id="将pod赶到其他节点"><a href="#将pod赶到其他节点" class="header-anchor">#</a> 将pod赶到其他节点</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl drain node1
+</code></pre></div><h4 id="解除不可调度状态"><a href="#解除不可调度状态" class="header-anchor">#</a> 解除不可调度状态</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl uncordon node1
+</code></pre></div><h4 id="node节点处于schedulingdisabled状态"><a href="#node节点处于schedulingdisabled状态" class="header-anchor">#</a> node节点处于schedulingdisabled状态</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl patch node app91 -p '{&quot;spec&quot;:{&quot;unschedulable&quot;:false}}'
+</code></pre></div><h4 id="master运行pod"><a href="#master运行pod" class="header-anchor">#</a> master运行pod</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl taint nodes master.k8s node-role.kubernetes.io/master-
+</code></pre></div><h4 id="master不运行pod"><a href="#master不运行pod" class="header-anchor">#</a> master不运行pod</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl taint nodes master.k8s node-role.kubernetes.io/master=:NoSchedule
+</code></pre></div><h4 id="获取集群的基本信息"><a href="#获取集群的基本信息" class="header-anchor">#</a> 获取集群的基本信息</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl cluster-info
+kubectl cluster-info dump
+kubectl get nodes
+kubectl get namespaces
+kubectl get deployment --all-namespaces
+kubectl get svc --all-namespaces
+kubectl get pod
+kubectl get pod -o wide --all-namespaces
+kubectl logs podName
+</code></pre></div><h4 id="创建pod或srv"><a href="#创建pod或srv" class="header-anchor">#</a> 创建pod或srv</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl create -f development.yaml
+</code></pre></div><h4 id="检查将要运行的-pod-的资源状况"><a href="#检查将要运行的-pod-的资源状况" class="header-anchor">#</a> 检查将要运行的 Pod 的资源状况</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl describe pod podName
+</code></pre></div><h4 id="删除-pod"><a href="#删除-pod" class="header-anchor">#</a> 删除 Pod</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl delete pod podName
+</code></pre></div><h4 id="pod有多少副本"><a href="#pod有多少副本" class="header-anchor">#</a> pod有多少副本</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl get rc
+</code></pre></div><h4 id="扩展-pod"><a href="#扩展-pod" class="header-anchor">#</a> 扩展 Pod</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl scale --replicas=3 rc podName
+</code></pre></div><h4 id="删除"><a href="#删除" class="header-anchor">#</a> 删除</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl delete deployment kubernetes-dashboard --namespace=kube-system
+kubectl delete svc kubernetes-dashboard --namespace=kube-system
+kubectl delete -f kubernetes-dashboard.yaml
+</code></pre></div><h4 id="进入pod"><a href="#进入pod" class="header-anchor">#</a> 进入pod</h4> <div class="language- extra-class"><pre class="language-text"><code>kubectl exec -ti podName /bin/bash
+</code></pre></div><h3 id="查看类命令"><a href="#查看类命令" class="header-anchor">#</a> 查看类命令</h3> <div class="language- extra-class"><pre class="language-text"><code>获取节点相应服务的信息 ： kubectl get pods 按selector名来查找pod： kubectl get pod --selector name=redis
+查看集群信息： kubectl cluster-info
+查看各组件信息： kubectl -s http://localhost:8080 get componentstatuses 或 kubectl get cs
+查看pods所在的运行节点: kubectl gkubectl get pods -o yamlet pods -o wide
+查看pods定义的详细信息： kubectl get pods -o yaml
+查看运行pod的环境变量： kubectl exec pod名 env
+查看指定pod的日志： kubectl logs -f pods/heapster-xxxxx -n kube-system
+</code></pre></div><h3 id="操作类命令"><a href="#操作类命令" class="header-anchor">#</a> 操作类命令</h3> <div class="language- extra-class"><pre class="language-text"><code>创建资源： kubectl apply -f 文件名.yaml kubectl create -f 文件名.yaml
+重建资源： kubectl replace -f 文件名 [--force]
+删除资源： kubectl delete -f 文件名、kubectl delete pod pod名、kubectl delete rc rc名、kubectl delete service service名
+</code></pre></div><h3 id="kubectl进阶命令操作"><a href="#kubectl进阶命令操作" class="header-anchor">#</a> kubectl进阶命令操作</h3> <h4 id="kubectl-get"><a href="#kubectl-get" class="header-anchor">#</a> kubectl get</h4> <div class="language- extra-class"><pre class="language-text"><code>获取指定资源的基本信息 kubectl get services kubernetes-dashboard -n kube-system #查看所有service
+kubectl get deployment kubernetes-dashboard -n kube-system #查看所有发布
+kubectl get pods --all-namespaces #查看所有pod
+kubectl get pods -o wide --all-namespaces #查看所有pod的IP及节点
+kubectl get pods -n kube-system | grep dashboard
+kubectl get nodes -l zone #获取zone的节点
+</code></pre></div><h4 id="kubectl-describe"><a href="#kubectl-describe" class="header-anchor">#</a> kubectl describe</h4> <div class="language- extra-class"><pre class="language-text"><code>查看指定资源详细描述信息 kubectl describe service/kubernetes-dashboard --namespace=&quot;kube-system&quot;
+kubectl describe pods/kubernetes-dashboard-349859023-g6q8c --namespace=&quot;kube-system&quot; #指定类型查看
+kubectl describe pod nginx-772ai #查看pod详细信息
+kubectl scale：动态伸缩 kubectl scale rc nginx --replicas=5 # 动态伸缩
+kubectl scale deployment redis-slave --replicas=5 #动态伸缩
+kubectl scale --replicas=2 -f redis-slave-deployment.yaml #动态伸缩
+kubectl exec：进入pod启动的容器 kubectl exec -it redis-master-1033017107-q47hh /bin/bash #进入容器
+</code></pre></div><h4 id="kubectl-label"><a href="#kubectl-label" class="header-anchor">#</a> kubectl label</h4> <p>添加label值 kubectl label nodes node1 zone=north #增加节点lable值 spec.nodeSelector: zone: north #指定pod在哪个节点</p> <div class="language- extra-class"><pre class="language-text"><code>kubectl label pod redis-master-1033017107-q47hh role=master #增加lable值 [key]=[value]
+kubectl label pod redis-master-1033017107-q47hh role- #删除lable值
+kubectl label pod redis-master-1033017107-q47hh role=backend --overwrite #修改lable值
+</code></pre></div><h4 id="kubectl-rolling-update"><a href="#kubectl-rolling-update" class="header-anchor">#</a> kubectl rolling-update</h4> <p>滚动升级</p> <div class="language- extra-class"><pre class="language-text"><code>kubectl rolling-update redis-master -f redis-master-controller-v2.yaml #配置文件滚动升级
+kubectl rolling-update redis-master --image=redis-master:2.0 #命令升级
+kubectl rolling-update redis-master --image=redis-master:1.0 --rollback #pod版本回滚
+</code></pre></div><h3 id="etcdctl常用操作-要进入容器里操作"><a href="#etcdctl常用操作-要进入容器里操作" class="header-anchor">#</a> etcdctl常用操作(要进入容器里操作)</h3> <blockquote><p><a href="https://www.kubernetes.org.cn/5021.html" target="_blank" rel="noopener noreferrer">https://www.kubernetes.org.cn/5021.html<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>#检查网络集群健康状态
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt  endpoint health
+# 检查成员情况
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt member list
+# 检查性能
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt check perf 
+# 日常操作 get/put
+https://etcd.io/docs/v3.3.12/demo/
+</code></pre></div></div> <!----> <footer class="page-edit"><!----> <!----></footer> <div></div> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.a3499603.js" defer></script><script src="/blog/assets/js/4.d75981d8.js" defer></script><script src="/blog/assets/js/2.7f01df2c.js" defer></script><script src="/blog/assets/js/12.50475fa0.js" defer></script>
+  </body>
+</html>
