@@ -64,6 +64,11 @@ https://github.com/justadudewhohacks/face-api.js
 
 教程
 https://www.bobobk.com/258.html
+
+### 输入5秒语音，将任何文本转换为这个人的语音
+
+https://google.github.io/tacotron/publications/speaker_adaptation/
+
 ## 0-6岁育儿地图
 ![avatar](zerotosix.jpg)
 
