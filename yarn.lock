@@ -4626,6 +4626,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+markdown-it-alarm@^1.0.2:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/markdown-it-alarm/-/markdown-it-alarm-1.0.5.tgz#e00b64c50c11884b19bf8c9e563162c6693d8de7"
+  integrity sha512-cj+rOV2lYq/vNI7yOBVVAD00TttoEj8766k3Byj5ykyubu79hPPPMzTKt0/VxLdqTj/bDA/ktuS1CpsWWZOkKg==
+
 markdown-it-anchor@^5.0.2:
   version "5.2.5"
   resolved "https://registry.npmjs.org/markdown-it-anchor/-/markdown-it-anchor-5.2.5.tgz#dbf13cfcdbffd16a510984f1263e1d479a47d27a"
@@ -4652,6 +4657,11 @@ markdown-it-table-of-contents@^0.4.0:
   version "0.4.4"
   resolved "https://registry.npmjs.org/markdown-it-table-of-contents/-/markdown-it-table-of-contents-0.4.4.tgz#3dc7ce8b8fc17e5981c77cc398d1782319f37fbc"
   integrity sha512-TAIHTHPwa9+ltKvKPWulm/beozQU41Ab+FIefRaQV1NRnpzwcV9QOe6wXQS5WLivm5Q/nlo0rl6laGkMDZE7Gw==
+
+markdown-it-video@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/markdown-it-video/-/markdown-it-video-0.6.3.tgz#ee96a8fce4a262872f8aaf9706c31540d40104c2"
+  integrity sha512-T4th1kwy0OcvyWSN4u3rqPGxvbDclpucnVSSaH3ZacbGsAts964dxokx9s/I3GYsrDCJs4ogtEeEeVP18DQj0Q==
 
 markdown-it@^8.4.1:
   version "8.4.2"
@@ -6087,9 +6097,9 @@ querystring@0.2.0:
   integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
 
 querystringify@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
-  integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
+  integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
@@ -6301,7 +6311,7 @@ require-main-filename@^1.0.1:
 
 requires-port@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+  resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
 reselect@^3.0.1:
@@ -7321,9 +7331,9 @@ url-loader@^1.0.1:
     schema-utils "^1.0.0"
 
 url-parse@^1.4.3:
-  version "1.4.7"
-  resolved "https://registry.npmjs.org/url-parse/-/url-parse-1.4.7.tgz#a8a83535e8c00a316e403a5db4ac1b9b853ae278"
-  integrity sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.1.tgz#d5fa9890af8a5e1f274a2c98376510f6425f6e3b"
+  integrity sha512-HOfCOUJt7iSYzEx/UqgtwKRMC6EU91NFhsCHMv9oM03VJcVo2Qrp8T8kI9D7amFf1cu+/3CEhgb3rF9zL7k85Q==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
